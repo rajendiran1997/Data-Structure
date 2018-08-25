@@ -30,10 +30,14 @@ public class Stack{
     }
     
     public void peek(){
-        if(isEmpty())
+        if(isEmpty()){
             System.out.println("There is no data in the Stack");
-        else
-            System.out.println(top.data);
+            System.out.println();
+        }
+        else{
+            System.out.println("Top is "+top.data);
+            System.out.println();
+        }
     }
     public boolean isEmpty(){
         if(top == null) 
@@ -48,7 +52,7 @@ public class Stack{
         a=0;
     }
 
-     public static void main(String []args){
+ public static void main(String []args){
          Stack s = new Stack();
          
          s.push(10);
@@ -56,10 +60,11 @@ public class Stack{
          s.push(12);
          s.push(13);
          s.push(1001);
-         s.pop();
         
          System.out.println("Removed data is "+s.pop());
+         System.out.println();
          s.peek();
-        System.out.println("Length is "+ s.length);
+        System.out.println("Length of the stack is "+ s.length);
+        System.out.println();
      }
 }
