@@ -1,0 +1,90 @@
+public class MyClass {
+    
+    private static ListNode head = null;
+    
+    public void display(ListNode head){
+        
+        if(head == null)
+            return;
+        
+        ListNode current = head;
+        int count = 0;
+        while(current != null){
+            count ++;
+            System.out.println(current);
+            current = current.next;
+        }
+        System.out.println();
+        System.out.println("Length of the List is " + count);
+        System.out.println();
+    }
+    
+    
+    
+    public<T, K> ListNode insertAtBeginning(ListNode head, T data, K age){
+        if(head == null){
+            ListNode newListnode = new ListNode(data, age);
+            return newListnode;
+        }
+            ListNode newListnode = new ListNode(data, age);
+            newListnode.next = head;
+            head = newListnode;
+            return head;
+        
+    }
+    
+    public<T, K> void insertAtEnd(T data, K age){
+        if(head == null){
+            return;
+        }
+            ListNode newListnode = new ListNode(data, age);
+            ListNode current = head;
+            while(current.next != null){
+                current = current.next;
+            }
+            current.next = newListnode;
+        
+    }
+    
+    
+    
+    private static class ListNode<T, K>{
+        private T data;
+        private K age;
+        private ListNode next;
+        
+        public ListNode(T data, K age){
+            this.data = data;
+            this.age = age;
+            this.next = null;
+        }
+        
+        public String toString(){
+            return ""+data+" "+age;
+        }
+        
+    }
+    
+    public static void main(String args[]) {
+      head = new ListNode("raj", 22);
+      ListNode second = new ListNode("venkat", 55);
+      ListNode third = new ListNode(44, "dhanam");
+      ListNode fourth = new ListNode("vinoth", 29);
+      ListNode fifth = new ListNode("gowri", 23);
+       
+      head.next = second;
+      second.next = third;
+      third.next = fourth;
+      fourth.next = fifth;
+       
+       MyClass obj = new MyClass();
+       obj.display(head);
+       System.out.println();
+       
+       head = obj.insertAtBeginning(head, "dhanush", 6);
+       obj.display(head);
+
+      obj.insertAtEnd("perumal", 33);
+       obj.display(head);
+    }
+}
