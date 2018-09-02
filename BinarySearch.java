@@ -7,7 +7,7 @@ public class BinarySearch{
             
             if(key.equals(arr[mid])) return mid;
             
-            if(key.compareTo(arr[mid]) < 0)
+            if(key.compareToIgnoreCase(arr[mid]) < 0)
                 high = mid -1;
             else
                 low = mid + 1;
@@ -18,9 +18,8 @@ public class BinarySearch{
     
     public static void main(String args[]){
         String []array = {"Dhanalakshmi","Gowri","Rajendiran","Venkat"};
-        String key = "Rajendiran";
+        String key = "raj";
         int index = binarySearch(array,0,array.length-1,key);
         System.out.println(key + " is found at the position "+index);
     }
 }
-
