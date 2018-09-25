@@ -1,4 +1,3 @@
-import java.util.*;
 public class DOB {
     public static void main(String args[]) {
         int cur_month = 9;
