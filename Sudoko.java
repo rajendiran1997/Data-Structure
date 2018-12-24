@@ -41,25 +41,25 @@ public class Sudoko {
 	}
 
 	static boolean solve(int row, int col) {
-
-		if(col == 9) {
-			col = 0;
-			row = row + 1;
-		}
-
+	
 		if(!unassigned()) {
 			// Below function prints all the posibilities of sudoko by comments the return call in this function
 			// printBoard(); 
 			return true; // first solution alone be displayed
 		}
 
+		if(col == 9) {
+			col = 0;
+			row = row + 1;
+		}
+
 		for(int i = 1; i <= board.length; i++) {
-				if(isSafe(row, col, i)) {
-					board[row][col] = i;
-					if(solve(row, col+1)) 
-						return true;
-					board[row][col] = 0;
-				}
+			if(isSafe(row, col, i)) {
+				board[row][col] = i;
+				if(solve(row, col+1)) 
+					return true;
+				board[row][col] = 0;
+			}
 		}
 		return false;
 	}
