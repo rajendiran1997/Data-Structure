@@ -2,95 +2,113 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
    public class Tictoc {
+
+        static char[][] createBoard() {
+            char board[][] = new char[3][3];
+            for(int i = 0; i < board.length; i++) {
+                for(int j = 0; j < board[0].length; j++) {
+                    board[i][j] = '-';
+                }
+            }
+            return board;
+        }
        
-        static void printBoard(int board[][]) {
-        for(int i = 0; i < board.length; i++) {
-            for(int j = 0; j < board[0].length; j++) {
-                out.print(board[i][j] + " ");
+        static void printBoard(char board[][]) {
+            for(int i = 0; i < board.length; i++) {
+                for(int j = 0; j < board[0].length; j++) {
+                    out.print(board[i][j] + " ");
+                }
+                out.println();
             }
-            out.println();
+            out.println("\n");
         }
-    }
     
-    static int[][] checkBoard(int board[][], int row, int col, boolean user) {
-        if(user) {
-            board[row][col] = 1;
-        }
-        else {
-            board[row][col] = 2;
-        }
-        return board;
-    }
-
-    static boolean check(int board[][], boolean user) {
-        boolean checker = false;
-        if(user) {
-
-            //check each row
-            for(int i = 0; i < board.length; i++) {
-                if(board[i][0] == 1 && board[i][1] == 1 && board[i][2] == 1) {
-                    checker = true;
-                    break;
-                }
+        static char[][] checkBoard(char board[][], int row, int col, boolean user) {
+            if(user && board[row][col] != 'X' && board[row][col] != 'O') {
+                board[row][col] = 'X';
             }
-
-            //check each col
-            for(int i = 0; i < board.length; i++) {
-                if(board[0][i] == 1 && board[1][i] == 1 && board[2][i] == 1) {
-                    checker = true;
-                    break;
-                }
+            else if(!user && board[row][col] != 'X' && board[row][col] != 'O'){
+                board[row][col] = 'O';
             }
-            
-            //check diagonal
-            if((board[0][0] == 1 && board[1][1] == 1 && board[2][2] == 1) || (board[0][2] == 1 && board[1][1] == 1 && board[2][0] == 1))
-                checker = true;
-
-        }
-        else {
-            
-            //check each row
-            for(int i = 0; i < board.length; i++) {
-                if(board[i][0] == 2 && board[i][1] == 2 && board[i][2] == 2) {
-                    checker = true;
-                    break;
-                }
-            }
-
-            //check each col
-            for(int i = 0; i < board.length; i++) {
-                if(board[0][i] == 2 && board[1][i] == 2 && board[2][i] == 2) {
-                    checker = true;
-                    break;
-                }
-            }
-            
-            //check diagonal
-            if((board[0][0] == 2 &&  board[1][1] == 2 && board[2][2] == 2) || (board[0][2] == 2 && board[1][1] == 2 && board[2][0] == 2))
-                checker = true;
-
+            return board;
         }
 
-        return checker;
-    }
+        static boolean check(char board[][], boolean user) {
+            boolean checker = false;
+            if(user) {
+
+                //check each row
+                for(int i = 0; i < board.length; i++) {
+                    if(board[i][0] == 'X' && board[i][1] == 'X' && board[i][2] == 'X') {
+                        checker = true;
+                        break;
+                    }
+                }
+
+                //check each col
+                for(int i = 0; i < board.length; i++) {
+                    if(board[0][i] == 'X' && board[1][i] == 'X' && board[2][i] == 'X') {
+                        checker = true;
+                        break;
+                    }
+                }
+                
+                //check diagonal
+                if((board[0][0] == 'X' && board[1][1] == 'X' && board[2][2] == 'X') || (board[0][2] == 'X' && board[1][1] == 'X' && board[2][0] == 'X'))
+                    checker = true;
+
+            }
+            else {
+                
+                //check each row
+                for(int i = 0; i < board.length; i++) {
+                    if(board[i][0] == 'O' && board[i][1] == 'O' && board[i][2] == 'O') {
+                        checker = true;
+                        break;
+                    }
+                }
+
+                //check each col
+                for(int i = 0; i < board.length; i++) {
+                    if(board[0][i] == 'O' && board[1][i] == 'O' && board[2][i] == 'O') {
+                        checker = true;
+                        break;
+                    }
+                }
+                
+                //check diagonal
+                if((board[0][0] == 'O' &&  board[1][1] == 'O' && board[2][2] == 'O') || (board[0][2] == 'O' && board[1][1] == 'O' && board[2][0] == 'O'))
+                    checker = true;
+
+            }
+
+            return checker;
+        }
        
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
-        int board[][] = new int[3][3];
+        char board[][] = createBoard();
         int start = 0;
         boolean user = true;
         printBoard(board);
         while(start != 9) {
             if(user) {
                 out.println("User 1");
-                out.println("Enter the row ");
-                int row = sc.nextInt();
-                out.println("Enter the col ");
-                int col = sc.nextInt();
+                int row = 0, col = 0;
+                boolean repeat = false;
+                do {
+                    if(repeat)
+                        System.err.println("Please don't overwrite\n");
+                    out.println("Enter the row ");
+                    row = sc.nextInt();
+                    out.println("Enter the col ");
+                    col = sc.nextInt();
+                    repeat = true;
+                } while(board[row][col] != '-');
                 board = checkBoard(board, row, col, user);
                 printBoard(board);
                 if(check(board, user)) {
-                    out.println("User 1 is the winner");
+                    out.println("User 1 is the winner\n");
                     break;
                 }
                 start++;
@@ -98,21 +116,30 @@ import static java.lang.System.out;
             }
             else {
                 out.println("User 2");
-                out.println("Enter the row ");
-                int row = sc.nextInt();
-                out.println("Enter the col ");
-                int col = sc.nextInt();
+                int row, col;
+                boolean repeat = false;
+                do {
+                    if(repeat)
+                        System.err.println("Please don't overwrite\n");
+                    out.println("Enter the row ");
+                    row = sc.nextInt();
+                    out.println("Enter the col ");
+                    col = sc.nextInt();
+                    repeat = true;
+                } while(board[row][col] != '-');
                 board = checkBoard(board, row, col, user);
                 printBoard(board);
                 if(check(board, user)) {
-                    out.println("User 2 is the winner");
+                    out.println("User 2 is the winner\n");
                     break;
                 }
                 start++;
                 user = true;
             }
         }
-        out.println("End of game");
+        out.println("End of the game\n");
+        if(start == 9)
+            out.println("Draw the match\n");
         printBoard(board);
     }
 }
