@@ -3,13 +3,14 @@ import static java.lang.System.out;
 public class CrossPrinting {
     
     static void crossPrint(char c[]) {
+        char s[] = c;
         
         boolean status = false;
       
         if(c.length%2 != 0) {
             int length = c.length;
             
-            for(int i = 0; i < c.length; i++) {
+            for(int i = 0,l=length-1; i < c.length&&l>=0; i++,l--) {
                 
                  if(length < 0)
                     status = true;
@@ -27,16 +28,21 @@ public class CrossPrinting {
                     out.print(" ");
                 }
                 
-                
-                out.print(c[i]);
+                if(!status)
+                    out.print(c[i]);
+                else
+                    out.print(c[l]);
                 
                     
                 for(int j = 0; j < length; j++)
                     out.print(" ");
                 
-                if(length > 0)
-                    out.print(c[i]);
-                
+                if(length > 0) {
+                    if(!status)
+                        out.print(c[l]);
+                    else
+                        out.print(c[i]);
+                }
                 
                 out.println();
             }
@@ -49,7 +55,7 @@ public class CrossPrinting {
     }
     
     public static void main(String args[]) {
-        String title = "rajendran";
+        String title = "geeksforgeeks";
         crossPrint(title.toCharArray());
     }
 }
