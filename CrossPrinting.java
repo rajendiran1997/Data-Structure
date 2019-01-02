@@ -55,7 +55,7 @@ public class CrossPrinting {
     }
     
     public static void main(String args[]) {
-        String title = "geeksforgeeks";
+        String title = "rajendran";
         crossPrint(title.toCharArray());
     }
 }
