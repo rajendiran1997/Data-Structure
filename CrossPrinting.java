@@ -6,7 +6,7 @@ public class CrossPrinting {
         
         boolean status = false;
       
-        if(c.length/2 != 0) {
+        if(c.length%2 != 0) {
             int length = c.length;
             
             for(int i = 0; i < c.length; i++) {
