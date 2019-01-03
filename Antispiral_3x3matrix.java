@@ -1,52 +1,52 @@
 import static java.lang.System.out;
 import java.util.Scanner;
 
-class AntiSpiral {
+public class AntiSpiral {
     
     static void antispiral(int x[][]) {
         
         //3 * 3 matrix only
-        int left = 0, right = 1, top = 0, bottom = 0;
+        boolean left = false, right = true, top = false, bottom = false;
         int row = 1, col = 1;
         int done = 0;
         while(done != (x.length*x.length)) {
-            if(left == 1) {
+            if(left) {
                 out.print(x[row][col] + " ");
                 col--;
                 done++;
                 if(col == 0) {
-                    left = 0;
-                    top = 1;
+                    left = false;
+                    top = true;
                 }
             }
             
-            if(right == 1) {
+            if(right) {
                 out.print(x[row][col] + " ");
                 col++;
                 done++;
                 if(col == 2) {
-                    right = 0;
-                    bottom = 1;
+                    right = false;
+                    bottom = true;
                 }
             }
             
-            if(top == 1) {
+            if(top) {
                 out.print(x[row][col] + " ");
                 row--;
                 done++;
                 if(row == 0) {
-                    top = 0;
-                    right = 1;
+                    top = false;
+                    right = true;
                 }
             }
             
-            if(bottom == 1) {
+            if(bottom) {
                 out.print(x[row][col] + " ");
                 row++;
                 done++;
                 if(row == 2) {
-                    bottom = 0;
-                    left = 1;
+                    bottom = false;
+                    left = true;
                 }
             }
         }
