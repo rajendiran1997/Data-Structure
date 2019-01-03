@@ -5,12 +5,10 @@ public class EmailValidator{
         Pattern p = Pattern.compile("([a-zA-Z%0-9_-]+[\\.0-9a-zA-Z]+@[a-zA-Z.]+[a-zA-Z]{2,3})");
         Matcher m = p.matcher("mongoosem43mandayan@gmail.com");
         
-        while(m.find()){
-            System.out.println(m.group());
-        }
-        //System.out.println();
-        if(m.find() == false){
+        if(!m.find())
             System.out.println("Data not found");
-        }
+        else
+            System.out.println("Valid Email Address");
+
     }
 }
